@@ -43,6 +43,13 @@ Get Auth token from NGROK
 
 > sudo npm install mongoose
 
+## Api Keys
+
+- Go to the following and create a new app: https://developer.twitter.com/en/portal/apps/
+- Go to the settings of app created above and change app permissions to "Read, Write, and Direct Messages".
+- In the navigation panel go to Products -> Premium -> Dev Environment and setup "Account Activity APISandbox".
+- Put all the api keys in the secret.js and secret.py file.
+
 ## Running the Bot
 > tmux new-session -s python
 
