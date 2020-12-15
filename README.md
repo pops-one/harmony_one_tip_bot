@@ -49,6 +49,13 @@ Get Auth token from NGROK
 - Go to the settings of app created above and change app permissions to "Read, Write, and Direct Messages".
 - In the navigation panel go to Products -> Premium -> Dev Environment and setup "Account Activity APISandbox".
 - Put all the api keys in the secret.js and secret.py file.
+- TWITTER_WEBHOOK_ENV refers to the Dev environment label in twitter API dashboard
+- In Twitter > More > Settings > Privacy and Safety > Direct Messages , tick "Allow message requests from everyone"
+- Change bot_name, twitter_bot_name, twitter_bot_handle in telegramtipbot.py 
+- Change twitter_uid, bot_twitter_handle in twittertipbot.py
+- Change _networkUrl in hmyclient.py to point to production
+- Change explorer_url in telegramtipbot.py and twittertipbot.py  to point to production
+- Change botTwitterId,botHandle variables in  twitter_autohook.js
 
 ## Running the Bot
 > tmux new-session -s python
