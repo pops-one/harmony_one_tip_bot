@@ -13,10 +13,10 @@ class TwitterTipBot():
     auth = None
     api = None
     stream = None
-    twitter_uid = "1190625904717959169"
-    bot_twitter_handle = "prarysoft"
+    twitter_uid = "1313631808223940609"
+    bot_twitter_handle = "onetippingbot"
     dataStore = None
-    explorer_url = 'https://explorer.pops.one/#' #'https://explorer.harmony.one/#'
+    explorer_url = 'https://explorer.harmony.one/#' #'https://explorer.pops.one/#' #'https://explorer.harmony.one/#'
 
     def __init__( self ):
         try:
@@ -72,7 +72,7 @@ class TwitterTipBot():
                     self.api.send_direct_message(text=f'Your Deposit address is: {one_address}', recipient_id=sender_id)
                     print(e)
             else:
-                self.api.send_direct_message(text="You\'re not registered! Please register using the Telegram bot (https://t.me/onetipbot).", recipient_id=sender_id)
+                self.api.send_direct_message(text="You\'re not registered! Please register using the Telegram bot (https://t.me/onetippingbot).", recipient_id=sender_id)
         except Exception as ex:
             print(ex)
 
@@ -137,7 +137,7 @@ class TwitterTipBot():
                 balance = HmyClient.getBalance(one_address)
                 self.api.send_direct_message(text=f'Your Wallet Balance is: {balance}', recipient_id=sender_id)
             else:
-                self.api.send_direct_message(text=f'You\'re not registered! Please register using the Telegram bot (https://t.me/onetipbot).i If you are already registered please link you twitter handle.', recipient_id=sender_id)
+                self.api.send_direct_message(text=f'You\'re not registered! Please register using the Telegram bot (https://t.me/onetippingbot).i If you are already registered please link you twitter handle.', recipient_id=sender_id)
             # Save the data
         except Exception as ex:
             print(ex)
@@ -151,13 +151,13 @@ class TwitterTipBot():
                 one_address = user_details['one_address']
                 self.api.send_direct_message(text=f'Account History: {self.explorer_url}/address/{one_address}', recipient_id=sender_id)
             else:
-                self.api.send_direct_message(text=f'You\'re not registered! Please register using the Telegram bot (https://t.me/onetipbot)', recipient_id=sender_id)                
+                self.api.send_direct_message(text=f'You\'re not registered! Please register using the Telegram bot (https://t.me/onetippingbot)', recipient_id=sender_id)                
         except Exception as ex:
             print(ex)
 
     def help(self, sender_id):
         try:
-            help_text = u"Deposit \n----------------\n\nTo get started using @OneTipBot you need to deposit funds to your address. Sent a direct message to the @onetipbot using \" !deposit\" to find out your deposit address.\n\n\nWithdraw\n----------------\n\nTo Withdraw funds from @OneTipBot you need to send \"!withdraw <amount> <one_address>\". Make sure you have enough funds to cover the amount you want to send plus the network fees.\n\n\nTip\n-----------------\n\nYou can tip anyone by replying tweets using: @OneTipBot !tip <tip_amount> <twitter_handle> \n\n\nVerify Twitter Ownership\n-----------------\n\n\nTo verify twitter ownership type !verify <telegram_handle>.\n\n\nDisclaimer\n-----------------\n\nPrivate keys are managed by @OneTipBot and securely stored. The bot uses the private key to create transactions on your behalf via telegram bot. It is not recommended to store large quantities of your crypto on @OneTipBot."
+            help_text = u"Deposit \n----------------\n\nTo get started using @onetippingbot you need to deposit funds to your address. Sent a direct message to the @onetippingbot using \" !deposit\" to find out your deposit address.\n\n\nWithdraw\n----------------\n\nTo Withdraw funds from @onetippingbot you need to send \"!withdraw <amount> <one_address>\". Make sure you have enough funds to cover the amount you want to send plus the network fees.\n\n\nTip\n-----------------\n\nYou can tip anyone by replying tweets using: @onetippingbot !tip <tip_amount> <twitter_handle> \n\n\nVerify Twitter Ownership\n-----------------\n\n\nTo verify twitter ownership type !verify <telegram_handle>.\n\n\nDisclaimer\n-----------------\n\nPrivate keys are managed by @onetippingbot and securely stored. The bot uses the private key to create transactions on your behalf via telegram bot. It is not recommended to store large quantities of your crypto on @onetippingbot."
             self.api.send_direct_message(text=help_text, recipient_id=sender_id)
         except Exception as ex:
             print(ex)
@@ -195,7 +195,7 @@ class TwitterTipBot():
                                     else:
                                         receiver_details = self.dataStore.getUserDetailsByTwitterHandle(f'@{receiver}')
                                         if receiver_details == None:
-                                            reply_text = f"@{sender_handle}, @{receiver} is not registered! Please register using Telegram the bot (https://t.me/onetipbot)."
+                                            reply_text = f"@{sender_handle}, @{receiver} is not registered! Please register using Telegram the bot (https://t.me/onetippingbot)."
                                         else:
                                             if 'one_address' in receiver_details:
                                                 res = HmyClient.transfer(from_address, receiver_details['one_address'], tip)
@@ -213,15 +213,15 @@ class TwitterTipBot():
                         else:
                             success = "no"
                             failure_reason = "twitter account not verified"
-                            reply_text = f'@{sender_handle} Your twitter handle is not verified! Please verify using the Telegram bot (https://t.me/onetipbot).'                            
+                            reply_text = f'@{sender_handle} Your twitter handle is not verified! Please verify using the Telegram bot (https://t.me/onetippingbot).'                            
                     else:
                         success = "no"
                         failure_reason = "twitter account not verified"
-                        reply_text = f'@{sender_handle} Your twitter handle is not verified! Please verify using the Telegram bot (https://t.me/onetipbot).'                        
+                        reply_text = f'@{sender_handle} Your twitter handle is not verified! Please verify using the Telegram bot (https://t.me/onetippingbot).'                        
                 else:
                     success = "no"
                     failure_reason = "account does not exists"
-                    reply_text = f'@{sender_handle} You are not registered! Please register using the Telegram bot (https://t.me/onetipbot).'
+                    reply_text = f'@{sender_handle} You are not registered! Please register using the Telegram bot (https://t.me/onetippingbot).'
                 if reply_text != "":
                     self.api.update_status(status = reply_text, in_reply_to_status_id = tweet_id)
                     print(reply_text)
@@ -257,9 +257,9 @@ class TwitterTipBot():
                 user_details['twitter_handle_verified'] = True
                 self.dataStore.saveUserDetails(user_details)
             else:
-                reply_message = f"Sorry, we were not able to verify your twitter handle! Please retry using the Telegram bot (https://t.me/onetipbot)."
+                reply_message = f"Sorry, we were not able to verify your twitter handle! Please retry using the Telegram bot (https://t.me/onetippingbot)."
         else:
-            reply_message = f"Sorry, were not able to verify your twitter handle! Please retry using the Telegram bot (https://t.me/onetipbot)."
+            reply_message = f"Sorry, were not able to verify your twitter handle! Please retry using the Telegram bot (https://t.me/onetippingbot)."
         
         self.api.send_direct_message(text=reply_message, recipient_id=sender_id)
     
