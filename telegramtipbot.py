@@ -11,8 +11,8 @@ from utility import Utility
 
 
 
-# Can be anything you want
-starting_bonus = 200
+# Can be anything you want (Unused parameter, as per conversation with satish - 14-Dec-2020)
+#starting_bonus = 0
 
 # The always available context dict and the ability to preserve it make for a very rudimentary database
 
@@ -26,14 +26,14 @@ class OneTipTelegramBot:
     dataStore = None
     markup = None
     GET_ADDRESS, GET_AMOUNT, CONFIRM_TRANSFER, CANCEL_TRANSFER, GET_HANDLE, CONFIRM_HANDLE, CANCEL_HANDLE = range(7)
-    explorer_url = 'https://explorer.pops.one/#' #'https://explorer.harmony.one/#'
+    explorer_url = 'https://explorer.harmony.one/#' #'https://explorer.pops.one/#' #'https://explorer.harmony.one/#'
     reply_keyboard = [
         ['\U0001f916 Menu'],
     ]
     transfer_date = {}
-    bot_name = "@Dev_One_Tip_Bot"
-    twitter_bot_name = "prarysoft" #"OneTipbot"
-    twitter_bot_handle = "prarysoft" #"OneTipBot"
+    bot_name = "@onetippingbot"
+    twitter_bot_name = "onetippingbot" #"onetippingbot"
+    twitter_bot_handle = "onetippingbot" #"onetippingbot"
 
     def __init__(self):
 
@@ -242,7 +242,7 @@ class OneTipTelegramBot:
         context.bot.send_message(text="Please select an option:", chat_id=self.message.chat.id, reply_markup=reply_markup)
 
     def help(self, update, context):
-        help_text = u"Deposit \n----------------\n\nTo get started using @OneTipBot you need to deposit funds to your address. Click on the \"Deposit\" button on the main menu to to find your deposit address.\n\n\nWithdraw\n----------------\n\nTo Withdraw funds from your @OneTipBot you need to click on the \"Withdraw\" button. Follow the prompts and you will be able to withdraw. Make sure you have enough balance to cover the network fees and your withdrawal amount.\n\n\nTip\n-----------------\n\nYou can tip anyone by replying messages using: /tip [AMOUNT]\n\n\nRegister/Update Twitter handle\n-----------------\n\n\nTo register or update your Twitter handle you need to click on \"Register twitter handle/update twitter handle\". Follow the prompts and you will be able to register/update your twitter handle.\n\n\nDisclaimer\n-----------------\n\nPrivate keys are managed by @OneTipBot and securely stored. The bot uses the private key to create transactions on your behalf via telegram bot. It is not recommended to store large quantities of your crypto on @OneTipBot."
+        help_text = u"Deposit \n----------------\n\nTo get started using @onetippingbot you need to deposit funds to your address. Click on the \"Deposit\" button on the main menu to to find your deposit address.\n\n\nWithdraw\n----------------\n\nTo Withdraw funds from your @onetippingbot you need to click on the \"Withdraw\" button. Follow the prompts and you will be able to withdraw. Make sure you have enough balance to cover the network fees and your withdrawal amount.\n\n\nTip\n-----------------\n\nYou can tip anyone by replying messages using: /tip [AMOUNT]\n\n\nRegister/Update Twitter handle\n-----------------\n\n\nTo register or update your Twitter handle you need to click on \"Register twitter handle/update twitter handle\". Follow the prompts and you will be able to register/update your twitter handle.\n\n\nDisclaimer\n-----------------\n\nPrivate keys are managed by @onetippingbot and securely stored. The bot uses the private key to create transactions on your behalf via telegram bot. It is not recommended to store large quantities of your crypto on @onetippingbot."
         context.bot.send_message(text=help_text, chat_id=self.message.chat.id)
         self.send_menu(update, context)
 
@@ -250,7 +250,7 @@ class OneTipTelegramBot:
         if update.message.chat.type == "private":
             self.message = update.message
             self.pp.update_chat_data(self.message.chat.id, context.chat_data)
-            context.bot.send_message(chat_id = self.message.chat.id, text = "Welcome to @OneTipBot", reply_markup = self.markup)
+            context.bot.send_message(chat_id = self.message.chat.id, text = "Welcome to @onetippingbot", reply_markup = self.markup)
             self.send_menu(update, context)
         else:
             self.delete_message(chat_id=update.message.chat.id, message_id=update.message.message_id)

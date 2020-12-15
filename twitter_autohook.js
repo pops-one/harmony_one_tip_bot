@@ -18,8 +18,8 @@ var twitter_events = new Schema({
 var Model = mongoose.model('twitter_events', twitter_events);
 mongoose.Promise = global.Promise; mongoose.connect("mongodb://localhost:27017/one_tip_bot_data");
 
-const botTwitterId = "1190625904717959169";
-const botHandle = "@prarysoft";
+const botTwitterId = "1313631808223940609";
+const botHandle = "@onetippingbot";
 
 (async ƛ => {
   const webhook = new Autohook({
