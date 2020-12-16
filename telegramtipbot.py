@@ -13,7 +13,7 @@ from utility import GlobalVariables
 
 
 # Can be anything you want
-starting_bonus = 200
+starting_bonus = 0
 
 # The always available context dict and the ability to preserve it make for a very rudimentary database
 
