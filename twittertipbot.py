@@ -1,4 +1,3 @@
-
 import tweepy
 from tweepy import OAuthHandler
 from tweepy import API
@@ -7,7 +6,9 @@ from time import sleep
 from datastore import DataStore
 from hmyclient import HmyClient
 from utility import Utility
+from utility import GlobalVariables
 import subprocess
+import logging
 
 class TwitterTipBot():
     auth = None
@@ -16,10 +17,12 @@ class TwitterTipBot():
     twitter_uid = "1313631808223940609"
     bot_twitter_handle = "onetippingbot"
     dataStore = None
-    explorer_url = 'https://explorer.harmony.one/#' #'https://explorer.pops.one/#' #'https://explorer.harmony.one/#'
+    explorer_url = 'https://explorer.harmony.one/#' #'https://explorer.pops.one/#' 
+    
 
     def __init__( self ):
         try:
+            logging.basicConfig(filename=GlobalVariables._logFileName)
             self.auth = OAuthHandler(Secretes._twitterConsumerApiKey, Secretes._twitterConsumerApiSecret)
             self.auth.secure = True
             self.auth.set_access_token(Secretes._twitterAccessToken, Secretes._twitterAccessTokenSecret)
@@ -57,7 +60,7 @@ class TwitterTipBot():
                     if 'event_id' in twitter_event_details:
                         twitter_event_details['addressed'] = True
                         self.dataStore.saveTwitterEventDetails(twitter_event_details)
-            sleep(10)
+            sleep(3)
 
     # When someone wants to deposit one to his account
     def deposit(self, sender_handle, sender_id):
@@ -266,4 +269,3 @@ class TwitterTipBot():
     def showerror(self, text, sender_id):
         reply_message = f"Sorry! command {text} not supported, please use !help get supported actions"
         self.api.send_direct_message(text=reply_message, recipient_id=sender_id)
-
